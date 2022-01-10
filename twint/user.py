@@ -24,11 +24,11 @@ def User(ur):
         raise KeyError(msg)
     _usr = user()
     _usr.id = ur['data']['user']['rest_id']
-    _usr.name = ur['data']['user']['legacy']['name']
+    _usr.name = ur['data']['user']['legacy'].get('name', '')
     _usr.username = ur['data']['user']['legacy']['screen_name']
-    _usr.bio = ur['data']['user']['legacy']['description']
-    _usr.location = ur['data']['user']['legacy']['location']
-    _usr.url = ur['data']['user']['legacy']['url']
+    _usr.bio = ur['data']['user']['legacy'].get('description', '')
+    _usr.location = ur['data']['user']['legacy'].get('location', '')
+    _usr.url = ur['data']['user']['legacy'].get('url', '')
     # parsing date to user-friendly format
     _dt = ur['data']['user']['legacy']['created_at']
     _dt = datetime.datetime.strptime(_dt, '%a %b %d %H:%M:%S %z %Y')
